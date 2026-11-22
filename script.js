@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {
+ document.addEventListener("DOMContentLoaded", () => {
 
     // DATOS DE LOS RANKINGS
 
@@ -49,53 +49,111 @@ document.addEventListener("DOMContentLoaded", () => {
     ranking("escuelas", datos.escuelas);
 
     // GRÁFICOS DE RADAR
-    // DATOS DE EJEMPLO, PENDIENTES DE REEMPLAZAR
 
-    const radar = (id) =>
-        new Chart(document.getElementById(id), {
+    const azul = "rgb(0, 0, 255)";
+    const rojo = "rgb(255, 0, 0)";
+
+    const radares = {
+
+        comparaUniversidades: {
+            labels: [
+                ["Reputación", "académica"],
+                ["Reputación", "empleadores"],
+                ["Relación", "docente-estudiante"],
+                ["Citas por", "docente"],
+                ["Docentes", "internacionales"],
+                ["Estudiantes", "internacionales"],
+                ["Red de investigación", "internacional"],
+                ["Resultados de", "empleabilidad"],
+                "Sostenibilidad"
+            ],
+            origen:  { nombre: "Universidad de Chile",      datos: [92.0, 85.1, 9.9, 16.0, 10.6, 8.2, 76.8, 95.7, 66.4] },
+            destino: { nombre: "Universidade de São Paulo", datos: [97.4, 71.3, 26.9, 34.4, 6.4, 3.7, 96.5, 96.8, 89.7] }
+        },
+
+        comparaEscuelas: {
+            labels: [
+                ["Reputación académica", "(peso 90%)"],
+                ["Reputación empleadores", "(peso 10%)"],
+                ["Citas por paper", "(peso 0%)"],
+                ["H-index", "(peso 0%)"],
+                ["Red de investigación", "internacional (peso 0%)"]
+            ],
+            origen:  { nombre: "Diseño, Universidad de Chile",   datos: [52.5, 78.5, null, null, null] },
+            destino: { nombre: "FAU, Universidade de São Paulo", datos: [58.8, 73.2, null, null, null] }
+        }
+    };
+
+    Chart.defaults.font.family = '"Bricolage Grotesque", Helvetica, Arial, sans-serif';
+    Chart.defaults.color = "rgb(60, 60, 60)";
+
+    const radar = (id, { labels, origen, destino }) => {
+
+        if (!labels.length) return;
+
+        const serie = ({ nombre, datos }, color, relleno) => ({
+            label: nombre,
+            data: datos.map((v) => v ?? 0),
+            original: datos,
+            borderColor: color,
+            backgroundColor: relleno,
+            borderWidth: 2,
+            pointBackgroundColor: color,
+            pointRadius: 3
+        });
+
+        return new Chart(document.getElementById(id), {
             type: "radar",
 
             data: {
-                labels: [
-                    "Enero",
-                    "Febrero",
-                    "Marzo",
-                    "Abril",
-                    "Mayo",
-                    "Junio",
-                    "Julio"
-                ],
-
+                labels,
                 datasets: [
-                    {
-                        label: "Origen",
-
-                        data: [
-                            65, 59, 80, 81, 56, 55, 40
-                        ],
-
-                        borderColor: "rgb(54, 162, 235)",
-
-                        backgroundColor: "rgba(54, 162, 235, 0.2)"
-                    },
-
-                    {
-                        label: "Destino",
-
-                        data: [
-                            28, 48, 40, 19, 96, 27, 100
-                        ],
-
-                        borderColor: "rgb(255, 99, 132)",
-
-                        backgroundColor: "rgba(255, 99, 132, 0.2)"
-                    }
+                    serie(origen, azul, "rgba(0, 0, 255, 0.12)"),
+                    serie(destino, rojo, "rgba(255, 0, 0, 0.12)")
                 ]
+            },
+
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+
+                interaction: {
+                    mode: "index",
+                    intersect: true
+                },
+
+                scales: {
+                    r: {
+                        min: 0,
+                        max: 100,
+                        ticks: {
+                            stepSize: 20,
+                            backdropColor: "transparent"
+                        },
+                        angleLines: { color: "rgba(0, 0, 0, 0.15)" },
+                        grid: { color: "rgba(0, 0, 0, 0.15)" },
+                        pointLabels: { font: { size: 11 } }
+                    }
+                },
+
+                plugins: {
+                    legend: { position: "bottom" },
+                    tooltip: {
+                        filter: (item) =>
+                            item.dataset.original[item.dataIndex] !== null,
+                        callbacks: {
+                            label: (ctx) => {
+                                const v = ctx.dataset.original[ctx.dataIndex];
+                                return `${ctx.dataset.label}: ${v === null ? "no se pondera en Arte y Diseño" : v}`;
+                            }
+                        }
+                    }
+                }
             }
         });
+    };
 
-    radar("comparaUniversidades");
-    radar("comparaEscuelas");
+    Object.entries(radares).forEach(([id, config]) => radar(id, config));
 
     // MAPA DE SÃO PAULO
 
