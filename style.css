@@ -287,3 +287,8 @@ dd em {
     font-style: normal;
     font-weight: 700;
 }
+figure object {
+    display: block;
+    width: 100%;
+    aspect-ratio: 980 / 1257;
+}
