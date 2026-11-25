@@ -299,3 +299,28 @@ figure.infografia {
     width: min(950px, 96vw);
     margin: 4rem 0 2rem;
 }
+figure {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    margin: 2rem 0;
+}
+
+figure > div {
+    flex: 1 1 0;
+    min-width: 0;
+}
+
+figure img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+}
+
+figure figcaption {
+    text-align: left;
+    text-indent: 0;
+    padding: 0;
+    margin: 0.5rem 0 0 0;
+}
