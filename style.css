@@ -261,8 +261,8 @@ h2.pasaporte::before {
 /* PIE DE PÁGINA */
 
 footer {
-    margin-top: 10vh;
-    padding: 4rem 0;
+    margin-top: 2rem;
+    padding: 2rem 0 4rem;
     background: white;
 }
 
@@ -291,4 +291,11 @@ figure object {
     display: block;
     width: 100%;
     aspect-ratio: 980 / 1257;
+}
+figure.infografia {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(950px, 96vw);
+    margin: 4rem 0 2rem;
 }
