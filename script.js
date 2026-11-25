@@ -1,4 +1,4 @@
- document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", () => {
 
     // DATOS DE LOS RANKINGS
 
@@ -68,7 +68,7 @@
                 "Sostenibilidad"
             ],
             origen:  { nombre: "Universidad de Chile",      datos: [92.0, 85.1, 9.9, 16.0, 10.6, 8.2, 76.8, 95.7, 66.4] },
-            destino: { nombre: "Universidade de São Paulo", datos: [97.4, 71.3, 26.9, 34.4, 6.4, 3.7, 96.5, 96.8, 89.7] }
+            destino: { nombre: "Universidad de São Paulo", datos: [97.4, 71.3, 26.9, 34.4, 6.4, 3.7, 96.5, 96.8, 89.7] }
         },
 
         comparaEscuelas: {
@@ -80,7 +80,7 @@
                 ["Red de investigación", "internacional (peso 0%)"]
             ],
             origen:  { nombre: "Diseño, Universidad de Chile",   datos: [52.5, 78.5, null, null, null] },
-            destino: { nombre: "FAU, Universidade de São Paulo", datos: [58.8, 73.2, null, null, null] }
+            destino: { nombre: "Arte y Diseño, Universidad de São Paulo", datos: [58.8, 73.2, null, null, null] }
         }
     };
 
@@ -173,7 +173,7 @@
     L.marker([-23.5613991, -46.7307891])
         .addTo(map)
         .bindPopup(
-            "<b>Universidade de São Paulo</b><br>(USP)."
+            "<b>Universidad de São Paulo</b><br>(USP)."
         )
         .openPopup();
 
