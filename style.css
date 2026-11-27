@@ -291,20 +291,18 @@ figure object {
     width: 100%;
     aspect-ratio: 980 / 1257;
 }
-figure.infografia {
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
-    width: min(950px, 96vw);
-    margin: 4rem 0 2rem;
+.infografia {
+  max-width: 700px; 
+  width: 100%;      
+  margin: 2rem auto; 
 }
-figure {
-    display: flex;
-    gap: 8px;
-    align-items: flex-start;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
+
+.infografia object {
+  width: 100%;
+  height: auto;
+  display: block;
 }
+
 
 figure > div {
     flex: 1 1 0;
