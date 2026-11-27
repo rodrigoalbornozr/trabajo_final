@@ -250,7 +250,7 @@ h2.destino::before {
 }
 
 h2.pasaporte::before {
-    content: "▣";
+    content: "✈";
     display: block;
     margin: 3rem auto 1rem;
     font-size: 2.5rem;
